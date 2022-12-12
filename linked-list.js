@@ -23,7 +23,7 @@ class LinkedList {
   /** push(val): add new value to end of list. */
 
   push(val) {
-    const newNode = new Node(val)
+    const newNode = new Node(val);
     if (this.length === 0) {
       this.head = newNode;
       this.tail = newNode;
@@ -157,13 +157,39 @@ class LinkedList {
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
-    
+    if (idx >= this.length) throw new Error();
+
+    if (idx === 0) {
+      return this.shift();
+    }
+
+    let counter = idx - 1;
+    let curr = this.head;
+    while (counter !== 0) {
+      curr = curr.next;
+      counter--;
+    }
+
+    const removedNode = curr.next;
+    curr.next = curr.next.next;
+    this.length--;
+    return removedNode.val;
   }
 
   /** average(): return an average of all values in the list */
 
   average() {
+    if (this.length === 0) return 0;
 
+    let total = 0;
+
+    let curr = this.head;
+    while (curr !== null) {
+      total += curr.val;
+      curr = curr.next;
+    }
+
+    return total / this.length;
   }
 }
 
