@@ -129,7 +129,7 @@ class LinkedList {
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
-    if (idx > this.length) throw new Error();
+    if (idx < 0 || idx > this.length) throw new Error();
 
     if (idx === 0) {
       this.unshift(val);
@@ -195,10 +195,10 @@ class LinkedList {
   /** reverseInPlace(): Reverse and return a linked list in place */
 
   reverseInPlace() {
-    if(this.length === 0 || this.length === 1){
+    if (this.length === 0 || this.length === 1) {
       return;
     }
-    
+
     let curr = this.head; //head is a. curr is assigned value "a"
     let prev = curr;      //prev is assigned value "a"
     let next = curr.next; //next is assigned value "b"
@@ -210,15 +210,15 @@ class LinkedList {
     curr = next;          //curr is "a". next is "b". curr is reassigned to "b"
     next = curr.next;     //next is "b". curr.next points to "c". next is reassigned to c
 
-    while(next !== null) {
-      curr.next = prev; 
+    while (next !== null) {
+      curr.next = prev;
       //curr.next points to "c". prev is "a". curr.next points in reverse to "a"
       //this is to switch the arrow
 
       prev = curr;      //prev was "a". curr is "b". Move pointers up. prev is now "b"
       curr = next;      //curr was "b". next is "c". curr is reassigned to "c"
       next = curr.next; //next was "c". curr.next is "d" because changed on previous line.
-                        //next is reassigned to "d"
+      //next is reassigned to "d"
     }
 
     //At the end of linked list
